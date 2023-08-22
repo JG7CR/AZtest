@@ -5,8 +5,9 @@
     "options": {
       "set-session-context": false 
     },
-    "connection-string": "@env('DATABASE_CONNECTION_STRING')"
-  },
+
+    "connection-string": "@env('Server=psqlsv.postgres.database.azure.com;Database=TEST;Port=5432;User Id=sqluser@psqlsv;Password=root@123;Ssl Mode=Require;')"
+
   "runtime": {
     "rest": {
       "enabled": true,
@@ -30,7 +31,8 @@
   },
   "entities": {
     "Person": {
-      "source": "MyTestPersonTable",
+
+      "source": "TEST",
       "permissions": [
         {
           "actions": ["*"],
