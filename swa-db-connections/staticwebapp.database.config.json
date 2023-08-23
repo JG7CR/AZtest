@@ -32,7 +32,7 @@
   "entities": {
     "Person": {
 
-      "source": "TEST",
+      "source": "Test",
       "permissions": [
         {
           "actions": ["*"],
