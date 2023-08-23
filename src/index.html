@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>Static Web Apps Database Connections</h1>
+<h1>Static Web Apps Database Connections</h1>
 <blockquote>
     Open the console in the browser developer tools to see the API responses.
 </blockquote>
@@ -22,14 +22,15 @@
 </div>
 <script>
 
-aasync function list() {
+async function list() {
   const endpoint = '/data-api/rest/Person';
   const response = await fetch(endpoint);
   const data = await response.json();
   console.table(data.value);
 }
 
-async function get() {
+async function get() 
+{
   const id = 1;
   const endpoint = `/data-api/rest/Person/Id`;
   const response = await fetch(`${endpoint}/${id}`);
@@ -37,7 +38,8 @@ async function get() {
   console.table(result.value);
 }
 
-async function update() {
+async function update() 
+{
 
   const id = 1;
   const data = {
@@ -69,7 +71,9 @@ async function create() {
   const result = await response.json();
   console.table(result.value);
 }
-async function del() {
+
+async function del() 
+{
   const id = 3;
   const endpoint = '/data-api/rest/Person/Id';
   const response = await fetch(`${endpoint}/${id}`, {
