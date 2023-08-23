@@ -21,55 +21,20 @@
     <button id="delete" onclick="del()">Delete</button>
 </div>
 <script>
-async function list() {
 
-  const query = `
-      {
-        people {
-          items {
-            Id
-            Name
-          }
-        }
-      }`;
-
-  const endpoint = "/data-api/graphql";
-  const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: query })
-  });
-  const result = await response.json();
-  console.table(result.data.people.items);
+aasync function list() {
+  const endpoint = '/data-api/rest/Person';
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  console.table(data.value);
 }
 
 async function get() {
-
   const id = 1;
-
-  const gql = `
-    query getById($id: Int!) {
-      person_by_pk(Id: $id) {
-        Id
-        Name
-      }
-    }`;
-
-  const query = {
-    query: gql,
-    variables: {
-      id: id,
-    },
-  };
-
-  const endpoint = "/data-api/graphql";
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(query),
-  });
+  const endpoint = `/data-api/rest/Person/Id`;
+  const response = await fetch(`${endpoint}/${id}`);
   const result = await response.json();
-  console.table(result.data.person_by_pk);
+  console.table(result.value);
 }
 
 async function update() {
@@ -79,31 +44,14 @@ async function update() {
     Name: "Molly"
   };
 
-  const gql = `
-    mutation update($id: Int!, $item: UpdatePersonInput!) {
-      updatePerson(Id: $id, item: $item) {
-        Id
-        Name
-      }
-    }`;
-
-  const query = {
-    query: gql,
-    variables: {
-      id: id,
-      item: data
-    } 
-  };
-
-  const endpoint = "/data-api/graphql";
-  const res = await fetch(endpoint, {
-    method: "POST",
+  const endpoint = '/data-api/rest/Person/Id';
+  const response = await fetch(`${endpoint}/${id}`, {
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(query)
+    body: JSON.stringify(data)
   });
-
-  const result = await res.json();
-  console.table(result.data.updatePerson);
+  const result = await response.json();
+  console.table(result.value);
 }
 
 async function create() {
@@ -112,61 +60,27 @@ async function create() {
     Name: "Pedro"
   };
 
-  const gql = `
-    mutation create($item: CreatePersonInput!) {
-      createPerson(item: $item) {
-        Id
-        Name
-      }
-    }`;
-
-  const query = {
-    query: gql,
-    variables: {
-      item: data
-    } 
-  };
-
-  const endpoint = "/data-api/graphql";
-  const result = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(query)
-  });
-
-  const response = await result.json();
-  console.table(response.data.createPerson);
-}
-
-async function del() {
-
-  const id = 3;
-
-  const gql = `
-    mutation del($id: Int!) {
-      deletePerson(Id: $id) {
-        Id
-      }
-    }`;
-
-  const query = {
-    query: gql,
-    variables: {
-      id: id
-    }
-  };
-
-  const endpoint = "/data-api/graphql";
+  const endpoint = `/data-api/rest/Person/`;
   const response = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(query)
+    body: JSON.stringify(data)
   });
-
   const result = await response.json();
-  console.log(`Record deleted: ${ result.data.deletePerson.Id }`);
+  console.table(result.value);
 }
-
+async function del() {
+  const id = 3;
+  const endpoint = '/data-api/rest/Person/Id';
+  const response = await fetch(`${endpoint}/${id}`, {
+    method: "DELETE"
+  });
+  if(response.ok) {
+    console.log(`Record deleted: ${ id }`)
+  } else {
+    console.log(response);
+  }
+}
 </script>
 </body>
 
