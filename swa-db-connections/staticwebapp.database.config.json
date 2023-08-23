@@ -5,7 +5,7 @@
     "options": {
       "set-session-context": false 
     },
-    "connection-string": "@env('Server=psqlsv.postgres.database.azure.com;Database=TEST;Port=5432;User Id=sqluser@psqlsv;Password=root@123;Ssl Mode=Require;')"
+    "connection-string": "@env('Server=psqlsv.postgres.database.azure.com;Database=TEST;Port=5432;User Id=sqluser@psqlsv;Password=root@123;Ssl Mode=Require;Trust Server Certificate=True;')"
   },
   "runtime": {
     "rest": {

@@ -32,7 +32,7 @@ async function list() {
 async function get() 
 {
   const id = 1;
-  const endpoint = `/data-api/rest/Person/Id`;
+  const endpoint = '/data-api/rest/Person/Id';
   const response = await fetch(`${endpoint}/${id}`);
   const result = await response.json();
   console.table(result.value);
@@ -62,7 +62,7 @@ async function create() {
     Name: "Pedro"
   };
 
-  const endpoint = `/data-api/rest/Person/`;
+  const endpoint = '/data-api/rest/Person/';
   const response = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
